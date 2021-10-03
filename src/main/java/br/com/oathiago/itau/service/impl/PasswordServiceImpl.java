@@ -5,25 +5,21 @@ import br.com.oathiago.itau.service.PasswordService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Locale;
+
 @Service
 @Slf4j
 public class PasswordServiceImpl implements PasswordService {
 
+    private static final String SPECIAL_CHARACTERS = "!@#$%^&*()-+";
+
     @Override
     public Boolean validateKey(PasswordDto passwordDto) {
-        if (!validateSize(passwordDto.getKey())) {
-            return Boolean.FALSE;
-        }
-        if (!validateAlphabeticAndNumericLetters(passwordDto.getKey())) {
-            return Boolean.FALSE;
-        }
-        if (!validateLowerAndUpperCase(passwordDto.getKey())) {
-            return Boolean.FALSE;
-        }
-        if (!validateSpecialCharacters(passwordDto.getKey())) {
-            return Boolean.FALSE;
-        }
-        return Boolean.TRUE;
+        return validateSize(passwordDto.getKey())
+                && validateAlphabeticAndNumericLetters(passwordDto.getKey())
+                && validateLowerAndUpperCase(passwordDto.getKey())
+                && validateSpecialCharacters(passwordDto.getKey())
+                && validateRepeatedCharacter(passwordDto.getKey());
     }
 
     private Boolean validateSize(String key) {
@@ -39,6 +35,22 @@ public class PasswordServiceImpl implements PasswordService {
     }
 
     private Boolean validateSpecialCharacters(String key) {
+        char[] array = key.toUpperCase(Locale.ROOT).toCharArray();
+        int countSpecialCharacters = 0;
+        for (char value: array) {
+            countSpecialCharacters += (int) SPECIAL_CHARACTERS.toUpperCase(Locale.ROOT).chars().filter(ch -> ch == value).count();
+        }
+        return countSpecialCharacters > 0;
+    }
+
+    private Boolean validateRepeatedCharacter(String key) {
+        char[] array = key.toUpperCase(Locale.ROOT).toCharArray();
+        for (char value: array) {
+            if (key.toUpperCase(Locale.ROOT).chars().filter(ch -> ch == value).count() > 1) {
+                log.info(value+"");
+                return Boolean.FALSE;
+            }
+        }
         return Boolean.TRUE;
     }
 }

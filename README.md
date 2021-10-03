@@ -20,8 +20,8 @@ Para executá-los basta apenas executar o comando no terminal do intellij:
 
 #Exemplo de uma chamada:
 
-curl --location --request POST 'http://localhost:8080/v1/password/validate' \
+* curl --location --request POST 'http://localhost:8080/v1/password/validate' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-"key": "Th14g0 August*"
+"key": "Th1460 Aug_s+*"
 }'
