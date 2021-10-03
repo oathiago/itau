@@ -1,6 +1,5 @@
 package br.com.oathiago.itau.service.impl;
 
-import br.com.oathiago.itau.dto.PasswordDto;
 import br.com.oathiago.itau.service.PasswordService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -37,7 +36,7 @@ public class PasswordServiceImpl implements PasswordService {
     public Boolean validateSpecialCharacters(String key) {
         char[] array = key.toUpperCase(Locale.ROOT).toCharArray();
         int countSpecialCharacters = 0;
-        for (char value: array) {
+        for (char value : array) {
             countSpecialCharacters += (int) SPECIAL_CHARACTERS.toUpperCase(Locale.ROOT).chars().filter(ch -> ch == value).count();
         }
         return countSpecialCharacters > 0;
@@ -45,7 +44,7 @@ public class PasswordServiceImpl implements PasswordService {
 
     public Boolean validateRepeatedCharacter(String key) {
         char[] array = key.toUpperCase(Locale.ROOT).toCharArray();
-        for (char value: array) {
+        for (char value : array) {
             if (key.toUpperCase(Locale.ROOT).chars().filter(ch -> ch == value).count() > 1) {
                 return Boolean.FALSE;
             }
