@@ -14,27 +14,27 @@ public class PasswordServiceImpl implements PasswordService {
     private static final String SPECIAL_CHARACTERS = "!@#$%^&*()-+";
 
     @Override
-    public Boolean validateKey(PasswordDto passwordDto) {
-        return validateSize(passwordDto.getKey())
-                && validateAlphabeticAndNumericLetters(passwordDto.getKey())
-                && validateLowerAndUpperCase(passwordDto.getKey())
-                && validateSpecialCharacters(passwordDto.getKey())
-                && validateRepeatedCharacter(passwordDto.getKey());
+    public Boolean validateKey(String key) {
+        return validateSize(key)
+                && validateAlphabeticAndNumericLetters(key)
+                && validateLowerAndUpperCase(key)
+                && validateSpecialCharacters(key)
+                && validateRepeatedCharacter(key);
     }
 
-    private Boolean validateSize(String key) {
+    public Boolean validateSize(String key) {
         return key.length() >= 9;
     }
 
-    private Boolean validateAlphabeticAndNumericLetters(String key) {
+    public Boolean validateAlphabeticAndNumericLetters(String key) {
         return key.chars().anyMatch(Character::isLetter) && key.chars().anyMatch(Character::isDigit);
     }
 
-    private Boolean validateLowerAndUpperCase(String key) {
+    public Boolean validateLowerAndUpperCase(String key) {
         return key.chars().anyMatch(Character::isUpperCase) && key.chars().anyMatch(Character::isLowerCase);
     }
 
-    private Boolean validateSpecialCharacters(String key) {
+    public Boolean validateSpecialCharacters(String key) {
         char[] array = key.toUpperCase(Locale.ROOT).toCharArray();
         int countSpecialCharacters = 0;
         for (char value: array) {
@@ -43,11 +43,10 @@ public class PasswordServiceImpl implements PasswordService {
         return countSpecialCharacters > 0;
     }
 
-    private Boolean validateRepeatedCharacter(String key) {
+    public Boolean validateRepeatedCharacter(String key) {
         char[] array = key.toUpperCase(Locale.ROOT).toCharArray();
         for (char value: array) {
             if (key.toUpperCase(Locale.ROOT).chars().filter(ch -> ch == value).count() > 1) {
-                log.info(value+"");
                 return Boolean.FALSE;
             }
         }

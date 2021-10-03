@@ -19,7 +19,7 @@ public class PasswordController {
 
     @PostMapping(path = "/validate", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Boolean> validatePassword(@RequestBody PasswordDto passwordDto) {
-        return ResponseEntity.ok(passwordService.validateKey(passwordDto));
+        return ResponseEntity.ok(passwordService.validateKey(passwordDto.getKey()));
     }
 
 }
