@@ -18,7 +18,7 @@ class ItauApplicationTests {
 	@Test
 	void givenRepeatedLetters_validateFalseResponse() {
 		PasswordDto passwordDto = PasswordDto.builder().key("AFbTp9!faok").build();
-		ResponseEntity<Boolean> response = passwordController.validatePassword(passwordDto);
+		ResponseEntity<Boolean> response = passwordController.validateKey(passwordDto);
 		Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
 		Assertions.assertNotNull(response.getBody());
 		Assertions.assertFalse(response.getBody());
@@ -27,7 +27,7 @@ class ItauApplicationTests {
 	@Test
 	void givenCompletedLetters_validateTrueResponse() {
 		PasswordDto passwordDto = PasswordDto.builder().key("AbTp9!fok").build();
-		ResponseEntity<Boolean> response = passwordController.validatePassword(passwordDto);
+		ResponseEntity<Boolean> response = passwordController.validateKey(passwordDto);
 		Assertions.assertEquals(HttpStatus.OK, response.getStatusCode());
 		Assertions.assertNotNull(response.getBody());
 		Assertions.assertTrue(response.getBody());
