@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PasswordDto {
-
-    private String key;
+public class PasswordResponseDto {
+    private Boolean validate;
 }

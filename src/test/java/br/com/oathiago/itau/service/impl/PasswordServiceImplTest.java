@@ -67,32 +67,32 @@ class PasswordServiceImplTest {
 
     @Test
     void givenTwoLetters_validateFalseResponse() {
-        Assertions.assertFalse(passwordService.validateKey("ab"));
+        Assertions.assertFalse(passwordService.validateKey("ab").getValidate());
     }
 
     @Test
     void givenTwoLettersRepeated_validateFalseResponse() {
-        Assertions.assertFalse(passwordService.validateKey("aa"));
+        Assertions.assertFalse(passwordService.validateKey("aa").getValidate());
     }
 
     @Test
     void givenLettersWithoutNumbers_validateFalseResponse() {
-        Assertions.assertFalse(passwordService.validateKey("AAAbbbCc"));
+        Assertions.assertFalse(passwordService.validateKey("AAAbbbCc").getValidate());
     }
 
     @Test
     void givenFullLettersRepeated_validateFalseResponse() {
-        Assertions.assertFalse(passwordService.validateKey("AbTp9!foA"));
+        Assertions.assertFalse(passwordService.validateKey("AbTp9!foA").getValidate());
     }
 
     @Test
     void givenLettersWithoutSpecialCharacters_validateFalseResponse() {
-        Assertions.assertFalse(passwordService.validateKey("AbTp9 fok"));
+        Assertions.assertFalse(passwordService.validateKey("AbTp9 fok").getValidate());
     }
 
     @Test
     void givenCorrectCharacters_validateTrueResponse() {
-        Assertions.assertTrue(passwordService.validateKey("AbTp9!fok"));
+        Assertions.assertTrue(passwordService.validateKey("AbTp9!fok").getValidate());
     }
 
 }

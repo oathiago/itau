@@ -1,5 +1,6 @@
 package br.com.oathiago.itau.service.impl;
 
+import br.com.oathiago.itau.dto.PasswordResponseDto;
 import br.com.oathiago.itau.service.PasswordService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -13,12 +14,14 @@ public class PasswordServiceImpl implements PasswordService {
     private static final String SPECIAL_CHARACTERS = "!@#$%^&*()-+";
 
     @Override
-    public Boolean validateKey(String key) {
-        return validateSize(key)
-                && validateAlphabeticAndNumericLetters(key)
-                && validateLowerAndUpperCase(key)
-                && validateSpecialCharacters(key)
-                && validateRepeatedCharacter(key);
+    public PasswordResponseDto validateKey(String key) {
+        return PasswordResponseDto.builder()
+                .validate(validateSize(key)
+                        && validateAlphabeticAndNumericLetters(key)
+                        && validateLowerAndUpperCase(key)
+                        && validateSpecialCharacters(key)
+                        && validateRepeatedCharacter(key))
+                .build();
     }
 
     public Boolean validateSize(String key) {

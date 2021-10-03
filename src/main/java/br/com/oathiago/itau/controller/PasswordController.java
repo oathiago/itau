@@ -1,6 +1,7 @@
 package br.com.oathiago.itau.controller;
 
-import br.com.oathiago.itau.dto.PasswordDto;
+import br.com.oathiago.itau.dto.PasswordRequestDto;
+import br.com.oathiago.itau.dto.PasswordResponseDto;
 import br.com.oathiago.itau.service.PasswordService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
@@ -18,8 +19,8 @@ public class PasswordController {
     private final PasswordService passwordService;
 
     @PostMapping(path = "/validate/key", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Boolean> validateKey(@RequestBody PasswordDto passwordDto) {
-        return ResponseEntity.ok(passwordService.validateKey(passwordDto.getKey()));
+    public ResponseEntity<PasswordResponseDto> validateKey(@RequestBody PasswordRequestDto passwordRequestDto) {
+        return ResponseEntity.ok(passwordService.validateKey(passwordRequestDto.getKey()));
     }
 
 }
