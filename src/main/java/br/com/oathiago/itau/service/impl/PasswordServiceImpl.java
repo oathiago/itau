@@ -25,7 +25,7 @@ public class PasswordServiceImpl implements PasswordService {
     }
 
     public Boolean validateSize(String key) {
-        return key.length() >= 9;
+        return key != null && key.length() >= 9;
     }
 
     public Boolean validateAlphabeticAndNumericLetters(String key) {
