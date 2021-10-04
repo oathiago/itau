@@ -95,4 +95,9 @@ class PasswordServiceImplTest {
         Assertions.assertTrue(passwordService.validateKey("AbTp9!fok").getValidate());
     }
 
+    @Test
+    void givenNullCharacters_validateFalseResponse() {
+        Assertions.assertFalse(passwordService.validateKey(null).getValidate());
+    }
+
 }
